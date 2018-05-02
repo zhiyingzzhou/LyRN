@@ -1,0 +1,38 @@
+{
+  "name": "LyRN",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "dev": "node scripts/start.js"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "prop-types": "^15.6.1",
+    "react": "16.3.1",
+    "react-native": "0.55.3",
+    "react-native-cardview": "^1.1.5",
+    "react-native-dialogs": "^0.0.21",
+    "react-native-picker": "^4.3.5",
+    "react-native-storage": "^0.2.2",
+    "react-native-swiper": "^1.5.13",
+    "react-native-tab-view": "^0.0.77",
+    "react-navigation": "^1.5.11",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-actions": "^2.3.0",
+    "redux-saga": "^0.16.0"
+  },
+  "devDependencies": {
+    "babel-jest": "22.4.3",
+    "babel-preset-react-native": "4.0.0",
+    "cross-spawn": "^6.0.5",
+    "jest": "22.4.3",
+    "react-test-renderer": "16.3.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
