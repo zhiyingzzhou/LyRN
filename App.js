@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Provider } from 'react-redux';
 import store from './app/store/configureStore';
+import './app/util/px2dp';
 // 配置react-native-storage
 import './app/configureStorage';
 

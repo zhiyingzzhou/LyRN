@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
     Text,
     StyleSheet,
     TouchableOpacity,
-    InteractionManager
+    InteractionManager,
 } from 'react-native';
 
 export default class CityListComponent extends Component {
@@ -13,7 +13,7 @@ export default class CityListComponent extends Component {
     static propTypes = {
         data: PropTypes.array,
         handlePress: PropTypes.func,
-        cityListUpdate: PropTypes.func
+        cityListUpdate: PropTypes.func,
     }
     
     shouldComponentUpdate(nextProps) {
@@ -25,7 +25,7 @@ export default class CityListComponent extends Component {
     }
 
     handlePress = (data) => {
-        const { handlePress } = this.props;
+        const { handlePress, } = this.props;
 
         InteractionManager.runAfterInteractions(() => {
             handlePress && handlePress(data);
@@ -49,7 +49,7 @@ export default class CityListComponent extends Component {
     }
 
     render() {
-        const { data } = this.props;
+        const { data, } = this.props;
 
         if (data.length === 0) {
             return null;
@@ -67,16 +67,16 @@ const styles = StyleSheet.create({
     'container': {
         paddingLeft: scaleSize(15),
         paddingRight: scaleSize(15),
-        backgroundColor: '#FFF'
+        backgroundColor: '#FFF',
     },
     'row': {
         height: scaleSize(35),
         justifyContent: 'center',
         borderBottomWidth: StyleSheet.hairlineWidth,
-        borderBottomColor: '#eee'
+        borderBottomColor: '#eee',
     },
     'txt': {
         fontSize: setSpText(14),
         color: '#2d2d2d',
-    }
+    },
 });

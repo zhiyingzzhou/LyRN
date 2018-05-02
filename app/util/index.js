@@ -2,7 +2,7 @@ import {
     findNodeHandle,
     UIManager
 } from 'react-native';
-import lodash from './lodash.custom.min.js';
+import debounce from 'lodash.debounce';
 
 const Util = () => { };
 const class2type = {},
@@ -27,7 +27,7 @@ Util.prototype = {
     constructor: Util
 };
 
-Util.prototype.debounce = lodash.debounce;
+Util.prototype.debounce = debounce;
 
 /**
  * @description 判断元素是否为字符串

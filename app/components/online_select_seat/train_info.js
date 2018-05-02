@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
     Text,
     Image,
-    StyleSheet
+    StyleSheet,
 } from 'react-native';
 
 import TrainDecorator from '../train_decorator';
@@ -12,12 +12,12 @@ import TrainDecorator from '../train_decorator';
 @TrainDecorator
 export default class TrainInfoComponent extends Component {
     static propTypes = {
-        data: PropTypes.object
+        data: PropTypes.object,
     }
 
     state = {
         bDate: {},
-        eDate: {}
+        eDate: {},
     }
 
     componentWillMount() {
@@ -25,13 +25,13 @@ export default class TrainInfoComponent extends Component {
     }
 
     render() {
-        const { fmcity, fmtime, tocity, totime, trainno } = this.props.data;
-        const { bDate, eDate } = this.state;
+        const { fmcity, fmtime, tocity, totime, trainno, } = this.props.data;
+        const { bDate, eDate, } = this.state;
 
         return (
             <View style={{
                 height: scaleSize(100),
-                flexDirection: 'row'
+                flexDirection: 'row',
             }}>
                 <Image 
                     source={require('../../images/ticketsInfo.png')}
@@ -40,15 +40,15 @@ export default class TrainInfoComponent extends Component {
                         height: scaleSize(100),
                         position: 'absolute',
                         top: 0,
-                        left: 0
+                        left: 0,
                     }}
                 />
                 <View style={[
                     styles.item,
                     styles.side,
                     {
-                        alignItems: 'flex-start'
-                    }
+                        alignItems: 'flex-start',
+                    },
                 ]}>
                     <Text style={styles.city}>
                         {fmcity}
@@ -62,7 +62,7 @@ export default class TrainInfoComponent extends Component {
                         </Text>
                         <Text style={[
                             styles.datetime,
-                            styles.weekDay
+                            styles.weekDay,
                         ]}>
                             {bDate.weekDay}
                         </Text>
@@ -77,7 +77,7 @@ export default class TrainInfoComponent extends Component {
                     </Text>
                     <View style={{
                         flexDirection: 'row',
-                        alignItems: 'center'
+                        alignItems: 'center',
                     }}>
                         <View style={styles.line}>
                         </View>
@@ -87,11 +87,11 @@ export default class TrainInfoComponent extends Component {
                             borderColor: '#FFF',
                             borderWidth: StyleSheet.hairlineWidth,
                             alignItems: 'center',
-                            justifyContent: 'center'
+                            justifyContent: 'center',
                         }}>
                             <Text style={{
                                 fontSize: setSpText(12),
-                                color: '#FFF'
+                                color: '#FFF',
                             }}>经停信息</Text>
                         </View>
                         <View style={styles.line}>
@@ -102,8 +102,8 @@ export default class TrainInfoComponent extends Component {
                     styles.item,
                     styles.side,
                     {
-                        alignItems: 'flex-end'
-                    }
+                        alignItems: 'flex-end',
+                    },
                 ]}>
                     <Text style={styles.city}>
                         {tocity}
@@ -117,7 +117,7 @@ export default class TrainInfoComponent extends Component {
                         </Text>
                         <Text style={[
                             styles.datetime,
-                            styles.weekDay
+                            styles.weekDay,
                         ]}>
                             {bDate.weekDay}
                         </Text>
@@ -131,12 +131,12 @@ export default class TrainInfoComponent extends Component {
 const styles = StyleSheet.create({
     item: {
         flex: 1,
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
     },
     side: {
         paddingTop: scaleSize(15),
         paddingLeft: scaleSize(20),
-        paddingRight: scaleSize(20)
+        paddingRight: scaleSize(20),
     },
     center: {
         alignItems: 'center',
@@ -155,24 +155,24 @@ const styles = StyleSheet.create({
         marginBottom: scaleSize(6),
     },
     date: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     datetime: {
         color: '#FFF',
         fontSize: setSpText(12),
-        lineHeight: setSpText(12)
+        lineHeight: setSpText(12),
     },
     weekDay: {
-        marginLeft: scaleSize(6)
+        marginLeft: scaleSize(6),
     },
     trainno: {
         color: '#FFF',
         fontSize: setSpText(12),
-        marginBottom: scaleSize(6)
+        marginBottom: scaleSize(6),
     },
     line: {
         width: scaleSize(16),
         height: StyleSheet.hairlineWidth,
-        backgroundColor: '#FFF'
-    }
+        backgroundColor: '#FFF',
+    },
 });

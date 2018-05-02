@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
 } from 'react-native';
 
 export default class CityListTitle extends Component {
@@ -11,16 +11,16 @@ export default class CityListTitle extends Component {
     static propTypes = {
         title: PropTypes.oneOfType([
             PropTypes.string,
-            PropTypes.element
-        ])
+            PropTypes.element,
+        ]),
     }
 
     static defaultProps = {
-        title: ''
+        title: '',
     }
 
     render() {
-        const { title } = this.props;
+        const { title, } = this.props;
 
         return (
             <View style={styles.title}>
@@ -35,11 +35,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#e9ecf1',
         paddingLeft: scaleSize(15),
         justifyContent: 'center',
-        height: scaleSize(35)
+        height: scaleSize(35),
     },
     'title_txt': {
         fontSize: setSpText(14),
         lineHeight: scaleSize(14),
-        color: '#999'
-    }
+        color: '#999',
+    },
 });

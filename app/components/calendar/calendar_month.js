@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     ScrollView,
@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     StyleSheet,
     InteractionManager,
-    Dimensions
+    Dimensions,
 } from 'react-native';
 
 import date from '../../util/date';
@@ -18,18 +18,18 @@ const grayBgColor = '#e7e7e7';
 
 export default class CalendarMonthComponent extends Component {
     static defaultProps = {
-        data: []
+        data: [],
     }
 
     static contextTypes = {
-        navigation: PropTypes.object
+        navigation: PropTypes.object,
     }
 
     static propTypes = {
         data: PropTypes.array,
         onSelect: PropTypes.func,
         dayMap: PropTypes.object,
-        selectedTime: PropTypes.number
+        selectedTime: PropTypes.number,
     }
 
     endHolidayTime; // 放假结束日期的时间戳
@@ -50,7 +50,7 @@ export default class CalendarMonthComponent extends Component {
         28,
         34,
         35,
-        41
+        41,
     ]
 
     _refView = [];
@@ -69,12 +69,12 @@ export default class CalendarMonthComponent extends Component {
         // }
 
         this._refView[time].setNativeProps({
-            style: { backgroundColor: themeColor }
+            style: { backgroundColor: themeColor, },
         });
         this._refText[time].setNativeProps({
             style: {
-                color: '#FFF'
-            }
+                color: '#FFF',
+            },
         });
         // this._recentList[0] = {
         //     ref: this._refView[time],
@@ -88,7 +88,7 @@ export default class CalendarMonthComponent extends Component {
         //         color: txtColor
         //     }
         // };
-        const { onSelect } = this.props;
+        const { onSelect, } = this.props;
 
         if (onSelect) {
             InteractionManager.runAfterInteractions(() => {
@@ -160,7 +160,7 @@ export default class CalendarMonthComponent extends Component {
                 onPress={handlePress}
                 style={[
                     styles.each_day,
-                    { width: this.innerWidth / 7 }
+                    { width: this.innerWidth / 7, },
                 ]} key={index}
             >
                 <View 
@@ -171,8 +171,8 @@ export default class CalendarMonthComponent extends Component {
                         {
                             
                             backgroundColor: bgColor,
-                            width: number ? scaleSize(50) : scaleSize(20)
-                        }
+                            width: number ? scaleSize(50) : scaleSize(20),
+                        },
                     ]}
                 >
                     <Text 
@@ -189,7 +189,7 @@ export default class CalendarMonthComponent extends Component {
                         ? <Text 
                             style={[
                                 styles.each_day_txt,
-                                { color: txt ? '#FF6540' : themeColor }
+                                { color: txt ? '#FF6540' : themeColor, },
                             ]}
                         >{txt ? txt : this.dayMap[time]}</Text> 
                         : null
@@ -199,7 +199,7 @@ export default class CalendarMonthComponent extends Component {
                         top: scaleSize(3),
                         right: scaleSize(1),
                         fontSize: setSpText(10),
-                        color: '#33cc66'
+                        color: '#33cc66',
                     }}>假</Text>
                 }
             </TouchableOpacity>
@@ -207,19 +207,19 @@ export default class CalendarMonthComponent extends Component {
     }
 
     render() {
-        const { width } = Dimensions.get('window');
-        const { data, dayMap } = this.props;
-        const { navigation: { state: { params: { selectedTime } } } } = this.context;
+        const { width, } = Dimensions.get('window');
+        const { data, dayMap, } = this.props;
+        const { navigation: { state: { params: { selectedTime, }, }, }, } = this.context;
 
         this.selectedTime = selectedTime; // 上一次选择的时间
         this.dayMap = dayMap;
         this.innerWidth = width * 0.9;
 
         return (
-            <ScrollView style={{ flex: 1 }}>
+            <ScrollView style={{ flex: 1, }}>
                 {
                     data.map((monthData, index) => {
-                        const { year, month, dayList } = monthData;
+                        const { year, month, dayList, } = monthData;
 
                         return (
                             <View key={index}>
@@ -247,34 +247,34 @@ const styles = StyleSheet.create({
         height: scaleSize(30),
         backgroundColor: '#f2f5f7',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     'month_header_txt': {
         fontSize: setSpText(14),
-        color: '#000'
+        color: '#000',
     },
     'month_body': {
         backgroundColor: '#FFF',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     'each_day': {
         height: scaleSize(50),
         // padding: 5,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     'each_day_number': {
         // width: scaleSize(18),
         height: scaleSize(20),
         borderRadius: scaleSize(5),
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     'each_day_txt': {
         fontSize: setSpText(11),
         lineHeight: setSpText(11),
         paddingTop: scaleSize(3),
-    }
+    },
 });

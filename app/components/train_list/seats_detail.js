@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
     Text,
     StyleSheet,
     TouchableOpacity,
-    Platform
+    Platform,
 } from 'react-native';
 
 export default class SeatsListComponent extends Component {
 
     static contextTypes = {
-        navigation: PropTypes.object
+        navigation: PropTypes.object,
     }
 
     static propTypes = {
         navigation: PropTypes.object,
         data: PropTypes.object,
-        seatsMap: PropTypes.array
+        seatsMap: PropTypes.array,
     }
 
     handlePress = (item) => {
@@ -25,15 +25,15 @@ export default class SeatsListComponent extends Component {
             this.context.navigation.navigate('TrainOrder', {
                 data: { 
                     ...this.props.data.item, 
-                    selectedSeats: item 
-                }
+                    selectedSeats: item, 
+                },
             });
         }
     }
 
     _renderSeatsList = (item, index) => {
-        const { seatsMap } = this.props;
-        const { cn, seats, price } = item;
+        const { seatsMap, } = this.props;
+        const { cn, seats, price, } = item;
 
         const height = Platform.OS === 'android' && index === seatsMap.length - 1 ? scaleSize(55) : scaleSize(51);
         
@@ -43,31 +43,31 @@ export default class SeatsListComponent extends Component {
                 style={[
                     styles.seats_list,
                     {
-                        height
-                    }
+                        height,
+                    },
                 ]}
             >
                 <View style={styles.seats_box}>
                     <Text style={{
                         fontSize: setSpText(16),
                         // lineHeight: 14,
-                        color: '#333'
+                        color: '#333',
                     }}>{cn}</Text>
                 </View>
                 <View style={styles.seats_box}>
                     <View style={{
                         flexDirection: 'row',
-                        alignItems: 'baseline'
+                        alignItems: 'baseline',
                     }}>
                         <Text style={{
                             fontSize: setSpText(12),
                             // lineHeight: 12,
-                            color: '#FF6540'
+                            color: '#FF6540',
                         }}>¥</Text>
                         <Text style={{
                             fontSize: setSpText(16),
                             // lineHeight: 16,
-                            color: '#FF6540'
+                            color: '#FF6540',
                         }}>{price}</Text>
                     </View>
                 </View>
@@ -75,7 +75,7 @@ export default class SeatsListComponent extends Component {
                     <Text style={{
                         fontSize: setSpText(14),
                         // lineHeight: 14,
-                        color: 'rgb(170, 170, 170)'
+                        color: 'rgb(170, 170, 170)',
                     }}>{seats} 张</Text>
                 </View>
                 <View style={styles.seats_box}>
@@ -91,13 +91,13 @@ export default class SeatsListComponent extends Component {
                             justifyContent: 'center',
                             alignItems: 'center',
                             borderRadius: 3,
-                            backgroundColor: seats > 0 ? '#3c6' : '#FF6540'
+                            backgroundColor: seats > 0 ? '#3c6' : '#FF6540',
                         }}
                     >
                         <Text style={{
                             fontSize: setSpText(14),
                             // lineHeight: 12,
-                            color: '#FFF'
+                            color: '#FFF',
                         }}>{seats > 0 ? '预定' : '抢票'}</Text>
                     </TouchableOpacity>
                 </View>
@@ -106,7 +106,7 @@ export default class SeatsListComponent extends Component {
     }
 
     render() {
-        const { seatsMap } = this.props;
+        const { seatsMap, } = this.props;
 
         return (
             <View style={{
@@ -114,9 +114,9 @@ export default class SeatsListComponent extends Component {
                 ...Platform.select({
                     ios: {
                         borderBottomLeftRadius: 4,
-                        borderBottomRightRadius: 4
-                    }
-                })
+                        borderBottomRightRadius: 4,
+                    },
+                }),
             }}>
                 {seatsMap.map(this._renderSeatsList)}
             </View>
@@ -134,12 +134,12 @@ const styles = StyleSheet.create({
         ...Platform.select({
             android: {
                 position: 'relative',
-                bottom: scaleSize(4.5)
-            }
-        })
+                bottom: scaleSize(4.5),
+            },
+        }),
     },
     'seats_box': {
         flex: 1,
-        alignItems: 'center'
-    }
+        alignItems: 'center',
+    },
 });

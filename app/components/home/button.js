@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     StyleSheet,
     View,
     Text,
     Dimensions,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 
 export default class ButtonComponent extends Component {
 
     static propTypes = {
         title: PropTypes.string,
-        handlePress: PropTypes.func
+        handlePress: PropTypes.func,
     }
 
     shouldComponentUpdate() {
@@ -20,20 +20,20 @@ export default class ButtonComponent extends Component {
     }
 
     handlePress = () => {
-        const { handlePress } = this.props;
+        const { handlePress, } = this.props;
 
         handlePress && handlePress();
     }
 
     render() {
-        const { width } = Dimensions.get('window');
-        const { title } = this.props;
+        const { width, } = Dimensions.get('window');
+        const { title, } = this.props;
 
         return (
             <View style={{
                 alignItems: 'center',
                 marginTop: scaleSize(13),
-                marginBottom: scaleSize(13)
+                marginBottom: scaleSize(13),
             }}>
                 <TouchableOpacity
                     onPress={this.handlePress}
@@ -43,8 +43,8 @@ export default class ButtonComponent extends Component {
                             styles.button,
                             {
                                 width: width * 0.86,
-                                position: 'relative'
-                            }
+                                position: 'relative',
+                            },
                         ]}
                     >
                         <Text style={styles.txt}>{title}</Text>
@@ -63,11 +63,11 @@ const styles = StyleSheet.create({
         // marginTop: scaleSize(13),
         // marginBottom: scaleSize(13),
         backgroundColor: '#28c54d',
-        borderRadius: 22.5
+        borderRadius: 22.5,
     },
     'txt': {
         color: '#FFF',
         fontSize: setSpText(18),
-        fontWeight: '700'
-    }
+        fontWeight: '700',
+    },
 });

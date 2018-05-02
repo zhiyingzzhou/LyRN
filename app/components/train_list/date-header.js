@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
@@ -7,12 +7,12 @@ import {
     Dimensions,
     StyleSheet,
     TouchableOpacity,
-    Animated
+    Animated,
 } from 'react-native';
 
 import date from '../../util/date';
 
-import { connect } from 'react-redux';
+import { connect, } from 'react-redux';
 
 const themeColor = '#3C6';
 // const imageScale = 12 / 22;
@@ -25,7 +25,7 @@ class DateHeaderComponent extends Component {
 
     static propTypes = {
         trainlistTime: PropTypes.string,
-        getTrainList: PropTypes.func
+        getTrainList: PropTypes.func,
     };
 
     static defaultProps={
@@ -33,7 +33,7 @@ class DateHeaderComponent extends Component {
 
     state = {
         dayArr: [],
-        index: 0
+        index: 0,
     }
 
     endSubscribeTime = date.endSubscribeTime();
@@ -41,11 +41,11 @@ class DateHeaderComponent extends Component {
     componentWillMount() {
         this.todayTimeStamp = date.getToday(); // 提前存储当日的时间戳
 
-        const { navigation: { state: { params: { tripTime } } } } = this.context;
+        const { navigation: { state: { params: { tripTime, }, }, }, } = this.context;
         // 将当前选择的时间戳存入数组
 
         this.setState({
-            dayArr: [date.resetTime(tripTime)]
+            dayArr: [date.resetTime(tripTime),],
         });
 
         this.animtedValue = new Animated.Value(0);
@@ -54,8 +54,8 @@ class DateHeaderComponent extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.trainlistTime !== this.props.trainlistTime) {
             this.setState({
-                dayArr: [date.resetTime(nextProps.trainlistTime)],
-                index: 0
+                dayArr: [date.resetTime(nextProps.trainlistTime),],
+                index: 0,
             }, () => {
                 this.startAnimation(this.state.index, 0, () => {
                     // 重新刷新列车时刻表
@@ -73,7 +73,7 @@ class DateHeaderComponent extends Component {
         Animated.timing(this.animtedValue, {
             toValue: value,
             duration,
-            useNativeDriver: true
+            useNativeDriver: true,
         }).start(() => { 
             if (callback) {
                 callback();
@@ -83,12 +83,12 @@ class DateHeaderComponent extends Component {
 
     selectPrevDay = () => {
         requestAnimationFrame(() => {
-            const { dayArr } = this.state;
-            let { index } = this.state;
+            const { dayArr, } = this.state;
+            let { index, } = this.state;
 
             if (index > 0) {
                 index--;
-                this.setState({ index });
+                this.setState({ index, });
                 this.startAnimation(index, 200, () => {
                     
                     // 刷新时刻表
@@ -101,7 +101,7 @@ class DateHeaderComponent extends Component {
                 if (this.todayTimeStamp <= prevDayTimeStamp) {
                     dayArr.unshift(prevDayTimeStamp);
                     this.setState({
-                        dayArr
+                        dayArr,
                     }, () => {
                         this.startAnimation(index + 1, 0, () => { 
                             this.startAnimation(index, 200, () => {
@@ -117,12 +117,12 @@ class DateHeaderComponent extends Component {
 
     selectNextDay = () => {
         requestAnimationFrame(() => {
-            const { dayArr } = this.state;
-            let { index } = this.state;
+            const { dayArr, } = this.state;
+            let { index, } = this.state;
 
             if (index < dayArr.length - 1) {
                 index++;
-                this.setState({ index });
+                this.setState({ index, });
                 this.startAnimation(index, 200, () => {
                     const time = date.covertToMonthAndDay(dayArr[index]).dateSeq;
 
@@ -134,10 +134,10 @@ class DateHeaderComponent extends Component {
 
                 dayArr.push(time);
                 this.setState({
-                    dayArr
+                    dayArr,
                 }, () => {
                     index++;
-                    this.setState({ index });
+                    this.setState({ index, });
                     this.startAnimation(index, 200, () => {
                         // 刷新时刻表
                         this.props.getTrainList(date.covertToMonthAndDay(time).dateSeq, true);
@@ -148,19 +148,19 @@ class DateHeaderComponent extends Component {
     }
 
     toSelectDate = () => {
-        const { index, dayArr } = this.state;
+        const { index, dayArr, } = this.state;
 
         requestAnimationFrame(() => {
             this.context.navigation.navigate('Calendar', {
                 key: 'trainlistTime',
-                selectedTime: dayArr[index]
+                selectedTime: dayArr[index],
             });
         });
     }
 
     render() {
-        const { dayArr, index } = this.state;
-        const { width } = Dimensions.get('window');
+        const { dayArr, index, } = this.state;
+        const { width, } = Dimensions.get('window');
         const btnWidth = (width - 12) * 0.28;
         const lastIndex = dayArr.length - 1;
         
@@ -177,8 +177,8 @@ class DateHeaderComponent extends Component {
                         styles.btn,
                         {
                             width: btnWidth,
-                            paddingLeft: 15
-                        }
+                            paddingLeft: 15,
+                        },
                     ]}>
                         {/* <Image
                             source={require('../../images/arrow_left.png')}
@@ -194,8 +194,8 @@ class DateHeaderComponent extends Component {
                         <Text style={[
                             styles.btn_txt,
                             {
-                                opacity: isPreventSelectPrev ? 0.4 : 1
-                            }
+                                opacity: isPreventSelectPrev ? 0.4 : 1,
+                            },
                         ]}>
                         前一天
                         </Text>
@@ -210,7 +210,7 @@ class DateHeaderComponent extends Component {
                         backgroundColor: '#f4f4f4',
                         flexDirection: 'row',
                         borderRadius: 3,
-                        overflow: 'hidden'
+                        overflow: 'hidden',
                     }}
                     activeOpacity={0.4}
                     onPress={this.toSelectDate}
@@ -226,16 +226,16 @@ class DateHeaderComponent extends Component {
                                     inputRange: [
                                         -1,
                                         0, 
-                                        1
+                                        1,
                                     ],
                                     outputRange: [
                                         110,
                                         0, 
-                                        -110
-                                    ]
-                                })
-                            }
-                        ]
+                                        -110,
+                                    ],
+                                }),
+                            },
+                        ],
                         
                     }}
                     >
@@ -246,10 +246,10 @@ class DateHeaderComponent extends Component {
                                 return (
                                     <View key={index} style={{ flex: 1, 
                                         alignItems: 'center', 
-                                        justifyContent: 'center' }}>
+                                        justifyContent: 'center', }}>
                                         <Text style={{
                                             fontSize: 14,
-                                            color: themeColor
+                                            color: themeColor,
                                         }}>{time.date} {time.weekDay}</Text>
                                     </View>
                                 );
@@ -272,7 +272,7 @@ class DateHeaderComponent extends Component {
                             source={require('../../images/calendar.png')} 
                             style={{
                                 width: 15,
-                                height: 15
+                                height: 15,
                             }}
                         />
                     </View>
@@ -287,14 +287,14 @@ class DateHeaderComponent extends Component {
                         {
                             width: btnWidth,
                             justifyContent: 'flex-end',
-                            paddingRight: 15
-                        }
+                            paddingRight: 15,
+                        },
                     ]}>
                         <Text style={[
                             styles.btn_txt,
                             {
-                                opacity: isPreventSelectNext ? 0.4 : 1
-                            }
+                                opacity: isPreventSelectNext ? 0.4 : 1,
+                            },
                         ]}>
                         后一天
                         </Text>
@@ -326,21 +326,21 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderColor: '#e4e4e4',
-        marginBottom: 5
+        marginBottom: 5,
     },
     'btn': {
         height: 24,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     'btn_txt': {
         fontSize: setSpText(14),
-        color: themeColor
-    }
+        color: themeColor,
+    },
 });
 
 const mapStateToProps = (state) => ({
-    trainlistTime: state.Date.trainlistTime
+    trainlistTime: state.Date.trainlistTime,
 });
 
 export default connect(mapStateToProps, () => ({}))(DateHeaderComponent);

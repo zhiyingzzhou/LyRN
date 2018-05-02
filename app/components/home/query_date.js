@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     StyleSheet,
     View,
     Text,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 
 export default class QueryDateComponent extends Component {
@@ -12,7 +12,7 @@ export default class QueryDateComponent extends Component {
     static propTypes = {
         tripTime: PropTypes.string,
         tripTimeDes: PropTypes.string,
-        handlePress: PropTypes.func
+        handlePress: PropTypes.func,
     }
 
     covertDate(time) {
@@ -23,14 +23,14 @@ export default class QueryDateComponent extends Component {
 
     handlePress = () => {
         requestAnimationFrame(() => {
-            const { handlePress } = this.props;
+            const { handlePress, } = this.props;
 
             handlePress && handlePress(); // eslint-disable-line
         });
     }
 
     render() {
-        const { tripTime, tripTimeDes } = this.props;
+        const { tripTime, tripTimeDes, } = this.props;
         
         return (
             <TouchableOpacity onPress={this.handlePress} style={styles.query_date}>
@@ -53,17 +53,17 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'center',
         borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: '#dcdcdc'
+        borderColor: '#dcdcdc',
     },
     'query_date_inner': {
         flexDirection: 'row',
     },
     date: {
         fontSize: setSpText(25),
-        color: '#333'
+        color: '#333',
     },
     'date_txt': {
         color: '#999',
-        fontSize: setSpText(14)
+        fontSize: setSpText(14),
     },
 });

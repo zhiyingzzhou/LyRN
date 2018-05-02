@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
     Text,
     StyleSheet,
     TouchableOpacity,
-    Image
+    Image,
 } from 'react-native';
 
 import _ from '../../util';
@@ -13,13 +13,13 @@ import _ from '../../util';
 export default class SeatsComponent extends Component {
 
     static propTypes = {
-        data: PropTypes.object
+        data: PropTypes.object,
     }
 
-    state = { seatsMap: [] }
+    state = { seatsMap: [], }
 
     componentWillMount() {
-        const { data: { ticketstatus, selectedSeats } } = this.props;
+        const { data: { ticketstatus, selectedSeats, }, } = this.props;
         const seatsMap = [];
                 
         for (const i in ticketstatus) {
@@ -40,25 +40,25 @@ export default class SeatsComponent extends Component {
             }
         }
         this.setState({
-            seatsMap
+            seatsMap,
         });
     }
 
     handlePres = (index) => {
-        const { seatsMap } = this.state;
+        const { seatsMap, } = this.state;
 
         seatsMap.forEach((seat) => {
             seat.isSelected = false;
         });
         seatsMap[index].isSelected = true;
         this.setState({
-            seatsMap
+            seatsMap,
         });
     }
 
     _renerSeatsMap() {
         return this.state.seatsMap.map((seat, index) => {
-            const { cn, price, seats, isSelected, txtColor, priceColor } = seat;
+            const { cn, price, seats, isSelected, txtColor, priceColor, } = seat;
 
             const style = isSelected ? {
                 backgroundColor: 'rgba(51,204,102,.1)',
@@ -82,26 +82,26 @@ export default class SeatsComponent extends Component {
                         borderBottomWidth: StyleSheet.hairlineWidth,
                         borderRightWidth: StyleSheet.hairlineWidth,
                         borderColor: '#ddd',
-                        ...style
+                        ...style,
                     }}> 
                     <View>
                         <Text style={[
                             styles.seatName,
                             {
-                                color: txtColor
-                            }
+                                color: txtColor,
+                            },
                         ]}>{cn}</Text>
                         <Text style={[
                             styles.price,
                             {
-                                color: priceColor
-                            }
+                                color: priceColor,
+                            },
                         ]}>¥{price}</Text>
                         <Text style={[
                             styles.number,
                             {
-                                color: txtColor
-                            }
+                                color: txtColor,
+                            },
                         ]}>{seats}张</Text>
                     </View>
                     {isSelected 
@@ -113,7 +113,7 @@ export default class SeatsComponent extends Component {
                                 position: 'absolute',
                                 right: scaleSize(6),
                                 bottom: scaleSize(6),
-                                zIndex: 500
+                                zIndex: 500,
                             }}
                         />
                         : null}
@@ -137,23 +137,23 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         shadowColor: 'rgba(0,0,0,.1)',
         shadowOffset: { width: scaleSize(1), 
-            height: scaleSize(2) }
+            height: scaleSize(2), },
     },
     seatName: {
         fontSize: setSpText(12),
         lineHeight: setSpText(12),
-        color: '#333'
+        color: '#333',
     },
     price: {
         fontSize: setSpText(12),
         lineHeight: setSpText(12),
         marginTop: scaleSize(8),
-        color: '#ff6540'
+        color: '#ff6540',
     },
     number: {
         fontSize: setSpText(12),
         lineHeight: setSpText(12),
         marginTop: scaleSize(8),
-        color: '#333'
-    }
+        color: '#333',
+    },
 });

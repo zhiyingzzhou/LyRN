@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     StyleSheet,
@@ -8,7 +8,7 @@ import {
     Easing,
     TouchableOpacity,
     Dimensions,
-    InteractionManager
+    InteractionManager,
 } from 'react-native';
 
 import _ from '../../util';
@@ -19,7 +19,7 @@ export default class QueryCityComponent extends Component {
         left: new Animated.Value(0),
         right: new Animated.Value(0),
         opacity: new Animated.Value(1),
-        rotate: new Animated.Value(0)
+        rotate: new Animated.Value(0),
     }
 
     innerWidth = 0;
@@ -30,9 +30,9 @@ export default class QueryCityComponent extends Component {
         fromCity: PropTypes.object,
         toCity: PropTypes.object,
         toSelectCityPage: PropTypes.func,
-        selectCity: PropTypes.func,
+        switchCity: PropTypes.func,
         fromKey: PropTypes.string,
-        toKey: PropTypes.string
+        toKey: PropTypes.string,
     }
 
     componentDidUpdate(nextProps, nextState) {
@@ -42,18 +42,18 @@ export default class QueryCityComponent extends Component {
                     Animated.timing(nextState.left, {
                         toValue: 0,
                         duration: 200,
-                        easing: Easing.in(Easing.linear)
+                        easing: Easing.in(Easing.linear),
                     }),
                     Animated.timing(nextState.right, {
                         toValue: 0,
                         duration: 200,
-                        easing: Easing.in(Easing.linear)
+                        easing: Easing.in(Easing.linear),
                     }),
                     Animated.timing(nextState.opacity, {
                         toValue: 1,
                         duration: 200,
-                        easing: Easing.in(Easing.linear)
-                    })
+                        easing: Easing.in(Easing.linear),
+                    }),
                 ]).start();
                 this.isSwitch = false;
             });
@@ -70,28 +70,25 @@ export default class QueryCityComponent extends Component {
                     Animated.timing(this.state.left, {
                         toValue: this.innerWidth - fromLayout.width,
                         duration: 200,
-                        easing: Easing.out(Easing.linear)
+                        easing: Easing.out(Easing.linear),
                     }),
                     Animated.timing(this.state.right, {
                         toValue: this.innerWidth - toLayout.width,
                         duration: 200,
-                        easing: Easing.out(Easing.linear)
+                        easing: Easing.out(Easing.linear),
                     }),
                     Animated.timing(this.state.opacity, {
                         toValue: 0,
                         duration: 200,
-                        easing: Easing.out(Easing.linear)
+                        easing: Easing.out(Easing.linear),
                     }),
                     Animated.timing(this.state.rotate, {
                         toValue: this.state.rotate._value === 0 ? 1 : 0,
-                        duration: 300
+                        duration: 300,
                     }),
                 ]).start(() => {
                     this.animationEnd = true;
-                    // 这个setState并没有什么实际意义,只是为了触发重新rerender
-                    this.setState({
-                        reupdate: true
-                    });
+                    this.forceUpdate();
                 });
             };
 
@@ -104,28 +101,31 @@ export default class QueryCityComponent extends Component {
     }
 
     handlePress = () => {
-        this.isSwitch = true;
-        this.animationEnd = false;
-        requestAnimationFrame(() => {
-            this.switchCity();
-        });
+        if (!this.isSwitch) {
+            this.isSwitch = true;
+            this.animationEnd = false;
+
+            requestAnimationFrame(() => {
+                this.switchCity();
+            });
+        }
     }
 
     switchCity = () => {
-        const { fromKey, toKey, fromCity, toCity, selectCity } = this.props;
+        const { fromKey, toKey, fromCity, toCity, switchCity, } = this.props;
 
-        selectCity({
+        switchCity({
             [fromKey]: toCity,
-            [toKey]: fromCity
+            [toKey]: fromCity,
         });
     }
 
     render() {
-        const { width } = Dimensions.get('window');
-        const { fromCity, toCity, toSelectCityPage, fromKey, toKey } = this.props;
-        const { left, right, opacity, rotate } = this.state;
+        const { width, } = Dimensions.get('window');
+        const { fromCity, toCity, toSelectCityPage, fromKey, toKey, } = this.props;
+        const { left, right, opacity, rotate, } = this.state;
 
-        this.innerWidth = (width - 30) / 2;
+        this.innerWidth = (width - scaleSize(15)) / 2;
 
         return (
             <View style={styles.query_city}>
@@ -136,7 +136,7 @@ export default class QueryCityComponent extends Component {
                             position: 'absolute',
                             top: scaleSize(40),
                             left,
-                            opacity
+                            opacity,
                         }}
                     >
                         <TouchableOpacity
@@ -169,23 +169,23 @@ export default class QueryCityComponent extends Component {
                                         rotate: rotate.interpolate({
                                             inputRange: [
                                                 0,
-                                                1
+                                                1,
                                             ],
                                             outputRange: [
                                                 '0deg',
-                                                '180deg'
-                                            ]
-                                        })
-                                    }
-                                ]
-                            }
+                                                '180deg',
+                                            ],
+                                        }),
+                                    },
+                                ],
+                            },
                         ]}
                         source={require('../../images/change_city.png')}
                     />
                 </TouchableOpacity>
                 <View style={[
                     styles.query_city_item,
-                    { alignItems: 'flex-end' }
+                    { alignItems: 'flex-end', },
                 ]}>
                     <Text style={styles.city_desc}>到达城市</Text>
                     <Animated.View
@@ -193,7 +193,7 @@ export default class QueryCityComponent extends Component {
                             position: 'absolute',
                             top: scaleSize(40),
                             right,
-                            opacity
+                            opacity,
                         }}
                     >
                         <TouchableOpacity
@@ -226,17 +226,17 @@ const styles = StyleSheet.create({
         marginLeft: scaleSize(15),
         marginRight: scaleSize(15),
         borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: '#dcdcdc'
+        borderColor: '#dcdcdc',
     },
     'query_city_item': {
-        flex: 1
+        flex: 1,
     },
     'city_desc': {
         fontSize: setSpText(12),
         lineHeight: scaleSize(12),
         color: '#999',
         paddingTop: scaleSize(15),
-        paddingBottom: scaleSize(14)
+        paddingBottom: scaleSize(14),
     },
     'city_txt': {
         fontSize: setSpText(28),
@@ -249,6 +249,6 @@ const styles = StyleSheet.create({
         width: scaleSize(30),
         height: scaleSize(30),
         position: 'relative',
-        top: scaleSize(30)
-    }
+        top: scaleSize(30),
+    },
 });

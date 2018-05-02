@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     Animated,
     Easing,
-    Platform
+    Platform,
 } from 'react-native';
 
 import SeatsDetailComponent from './seats_detail';
@@ -26,17 +26,17 @@ const pureText = (content, style, fontSize) => {
         ios: <Text style={[
             style,
             {
-                fontSize: setSpText(fontSize)
-            }
+                fontSize: setSpText(fontSize),
+            },
         ]}>{content}</Text>,
         android: <Text style={[
             style,
             {
                 fontSize: setSpText(fontSize),
                 lineHeight: setSpText(fontSize),
-                includeFontPadding: false
-            }
-        ]}>{content}</Text>
+                includeFontPadding: false,
+            },
+        ]}>{content}</Text>,
     });
 };
 
@@ -45,7 +45,7 @@ export default class ItemComponent extends Component {
     static propTypes = {
         data: PropTypes.object,
         viewWidth: PropTypes.number,
-        parentContext: PropTypes.object
+        parentContext: PropTypes.object,
     }
 
     showDetail = false;
@@ -53,11 +53,11 @@ export default class ItemComponent extends Component {
     state = {
         height: new Animated.Value(seatsHeight),
         topHeight: new Animated.Value(seatsHeight),
-        bottomHeight: new Animated.Value(0)
+        bottomHeight: new Animated.Value(0),
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        const { height } = this.state;
+        const { height, } = this.state;
         
         return nextProps.data !== this.props.data || height !== nextState.height;
     }
@@ -66,9 +66,9 @@ export default class ItemComponent extends Component {
         return (
             <Text style={{
                 fontSize: 12,
-                color: '#666'
+                color: '#666',
             }}>将于 <Text style={{
-                    color: '#FF6540'
+                    color: '#FF6540',
                 }}>{notetime} </Text> 
             起售，可预约抢票</Text>
         );
@@ -76,7 +76,7 @@ export default class ItemComponent extends Component {
 
     _renderSeats(data) {
         return data.map((item, index) => {
-            const { cn, seats } = item;
+            const { cn, seats, } = item;
 
             if (seats > 0) {
                 return <Text 
@@ -85,7 +85,7 @@ export default class ItemComponent extends Component {
                         fontSize: setSpText(12),
                         // lineHeight: setSpText(11),
                         marginLeft: scaleSize(8),
-                        color: '#333'
+                        color: '#333',
                     }}
                 >{cn} ({seats})</Text>;
             }
@@ -94,7 +94,7 @@ export default class ItemComponent extends Component {
                 fontSize: setSpText(12),
                 // lineHeight: setSpText(11),
                 marginLeft: scaleSize(8),
-                color: '#ccc'
+                color: '#ccc',
             }}
             >{cn} (无)</Text>;
         });
@@ -126,8 +126,8 @@ export default class ItemComponent extends Component {
         setTimeout(() => {
             this._topRef && this._topRef.setNativeProps({
                 style: {
-                    opacity: 1
-                }
+                    opacity: 1,
+                },
             });
         }, 100);
     }
@@ -135,8 +135,8 @@ export default class ItemComponent extends Component {
     open() {
         this._topRef && this._topRef.setNativeProps({
             style: {
-                opacity: 0
-            }
+                opacity: 0,
+            },
         });
         Animated.parallel([
             Animated.timing(this.state.height, {
@@ -156,7 +156,7 @@ export default class ItemComponent extends Component {
                 duration: 150,
                 easing: Easing.ease,
                 // useNativeDriver: true
-            })
+            }),
         ]).start(() => {
             this.showDetail = true;
         });
@@ -183,8 +183,8 @@ export default class ItemComponent extends Component {
     }
 
     _renderContent = () => {
-        const { topHeight, bottomHeight, height } = this.state;
-        const { data } = this.props;
+        const { topHeight, bottomHeight, height, } = this.state;
+        const { data, } = this.props;
 
         // accbyidcard 是否可以通过刷身份证进站
         // fmcity 起始站
@@ -205,7 +205,7 @@ export default class ItemComponent extends Component {
             usedtime, 
             ticketstatus,
             notetype, // 1 还没开售，预约抢票
-            notetime 
+            notetime, 
         } = data.item;
 
         const seatsMap = [];
@@ -226,7 +226,7 @@ export default class ItemComponent extends Component {
         
         return (
             <View style={{
-                overflow: 'hidden'
+                overflow: 'hidden',
             }}>
                 <TouchableOpacity
                     activeOpacity={0.9}
@@ -235,20 +235,20 @@ export default class ItemComponent extends Component {
                 >
                     {/* 开始信息开始 */}
                     <View style={styles.info_column}>
-                        {pureText(fmtime, { color: '#333' }, 20)}
+                        {pureText(fmtime, { color: '#333', }, 20)}
                         {pureText(fmcity, { color: '#2d2d2d', 
-                            marginTop: 5 }, 14)}
+                            marginTop: 5, }, 14)}
                     </View>
                     {/* 开始信息结束 */}
                     <View style={styles.info_column}>
                         <View style={styles.trainno}>
-                            {pureText(trainno, { color: '#2d2d2d' }, 12)}
+                            {pureText(trainno, { color: '#2d2d2d', }, 12)}
                             {accbyidcard ? <Image
                                 resizeMode="cover"
                                 style={{
                                     width: cardScale * 12,
                                     height: scaleSize(12),
-                                    marginLeft: 4
+                                    marginLeft: 4,
                                 }}
                                 source={require('../../images/idcard.png')}
                             /> : null}
@@ -257,18 +257,18 @@ export default class ItemComponent extends Component {
                             resizeMode="cover"
                             style={{
                                 width: scaleSize(61),
-                                height: scaleSize(61) / lineScale
+                                height: scaleSize(61) / lineScale,
                             }}
                             source={require('../../images/right_line.png')}
                         />
                         {pureText(usedtime, { color: '#999', 
-                            marginTop: Platform.OS === 'ios' ? setSpText(4) : 0 }, 12)}
+                            marginTop: Platform.OS === 'ios' ? setSpText(4) : 0, }, 12)}
                     </View>
                     {/* 到达信息开始 */}
                     <View style={styles.info_column}>
-                        {pureText(totime, { color: '#333' }, 20)}
+                        {pureText(totime, { color: '#333', }, 20)}
                         {pureText(tocity, { color: '#2d2d2d', 
-                            marginTop: 5 }, 14)}
+                            marginTop: 5, }, 14)}
                     </View>
                     {/* 到达信息结束 */}
                     {/* 票价开始 */}
@@ -278,11 +278,11 @@ export default class ItemComponent extends Component {
                             color: '#ff5346',
                         }}>
                             <Text style={{
-                                fontSize: setSpText(12)
+                                fontSize: setSpText(12),
                             }}>¥</Text>
                             {Math.min.apply({}, priceMap)}
                             <Text style={{
-                                fontSize: setSpText(12)
+                                fontSize: setSpText(12),
                             }}>起</Text>
                         </Text>
                     </View>
@@ -291,8 +291,8 @@ export default class ItemComponent extends Component {
                 <Animated.View 
                     style={[
                         {
-                            height
-                        }
+                            height,
+                        },
                     ]} 
                 >
                     <Animated.View
@@ -303,8 +303,8 @@ export default class ItemComponent extends Component {
                             styles.train_seats,
                             {
                                 height: topHeight,
-                                opacity: 1
-                            }
+                                opacity: 1,
+                            },
                         ]}
                     >
                         {notetype === 1 ? this._renderOrderTips(notetime) : this._renderSeats(seatsMap)}
@@ -312,8 +312,8 @@ export default class ItemComponent extends Component {
                     <Animated.View
                         style={[
                             {
-                                height: bottomHeight
-                            }
+                                height: bottomHeight,
+                            },
                         ]}
                     >
                         <SeatsDetailComponent data={data} seatsMap={seatsMap} />
@@ -324,9 +324,9 @@ export default class ItemComponent extends Component {
     }
 
     render() {
-        const { viewWidth } = this.props;
+        const { viewWidth, } = this.props;
         // trainflag 1 列车停运 0 正常车次，不受控
-        const { item: { trainflag = '1' } } = this.props.data;
+        const { item: { trainflag = '1', }, } = this.props.data;
 
         if (trainflag === '1') {
             return null;
@@ -340,10 +340,10 @@ export default class ItemComponent extends Component {
                     // shadowColor: 'rgba(153,153,153,.2)',
                     shadowColor: '#ccc',
                     shadowOffset: { width: scaleSize(1), 
-                        height: scaleSize(2) },
+                        height: scaleSize(2), },
                     shadowRadius: 4,
                     shadowOpacity: 1,
-                    borderRadius: 4
+                    borderRadius: 4,
                 }}>
                     {this._renderContent()}
                 </View>
@@ -359,7 +359,7 @@ export default class ItemComponent extends Component {
                     backgroundColor: '#FFF',
                     width: viewWidth - 10,
                     marginLeft: 5,
-                    marginBottom: 3
+                    marginBottom: 3,
                 }}
             >
                 {this._renderContent()}
@@ -379,17 +379,17 @@ const styles = StyleSheet.create({
             ios: {
                 borderRadius: 4,
                 backgroundColor: '#FFF',
-            }
-        })
+            },
+        }),
     },
     'info_column': {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     'trainno': {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     'train_seats': {
         flexDirection: 'row',
@@ -399,12 +399,12 @@ const styles = StyleSheet.create({
             ios: {
                 backgroundColor: 'transparent',
                 borderBottomLeftRadius: 4,
-                borderBottomRightRadius: 4
+                borderBottomRightRadius: 4,
             },
             android: {
                 position: 'relative',
                 bottom: scaleSize(4),
-            }
-        })
-    }
+            },
+        }),
+    },
 });

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
     Text,
     TextInput,
-    Platform
+    Platform,
 } from 'react-native';
 
 import ListItemComponent from '../list_item';
@@ -12,7 +12,7 @@ import ListItemComponent from '../list_item';
 export default class ContactComponent extends Component {
 
     static contextTypes = {
-        navigation: PropTypes.object
+        navigation: PropTypes.object,
     }
 
     static propTypes = {
@@ -21,11 +21,11 @@ export default class ContactComponent extends Component {
     addPeople() {
         return (
             <View style={{
-                flexDirection: 'row'
+                flexDirection: 'row',
             }}>
                 <View style={{
                     width: scaleSize(18),
-                    height: scaleSize(18)
+                    height: scaleSize(18),
                 }}>
                     <View
                         style={{
@@ -33,7 +33,7 @@ export default class ContactComponent extends Component {
                             height: scaleSize(18),
                             backgroundColor: '#3C6',
                             position: 'absolute',
-                            left: 8
+                            left: 8,
                         }}
                     ></View>
                     <View
@@ -42,7 +42,7 @@ export default class ContactComponent extends Component {
                             height: scaleSize(2),
                             backgroundColor: '#3C6',
                             position: 'absolute',
-                            top: 8
+                            top: 8,
                         }}
                     ></View>
                 </View>
@@ -51,7 +51,7 @@ export default class ContactComponent extends Component {
                     fontSize: setSpText(16),
                     // lineHeight: setSpText(16),
                     marginLeft: scaleSize(15),
-                    marginTop: Platform.OS === 'ios' ? 2 : 0
+                    marginTop: Platform.OS === 'ios' ? 2 : 0,
                 }}>
                     添加/修改乘客
                 </Text>
@@ -62,7 +62,7 @@ export default class ContactComponent extends Component {
     _renderInput() {
         return (
             <View style={{
-                flex: 1
+                flex: 1,
             }}>
                 <TextInput
                     underlineColorAndroid="transparent"
@@ -75,7 +75,7 @@ export default class ContactComponent extends Component {
                         fontSize: setSpText(16),
                         // lineHeight: setSpText(16),
                         height: scaleSize(44),
-                        marginLeft: scaleSize(15)
+                        marginLeft: scaleSize(15),
                     }}
                 />
             </View>
@@ -91,14 +91,14 @@ export default class ContactComponent extends Component {
                             onPress: () => {
                                 this.context.navigation.navigate('Contact');
                             },
-                            title: this.addPeople()
+                            title: this.addPeople(),
                         },
                         {
                             title: '手机号码',
                             after: this._renderInput(),
-                            linkIcon: false
-                        }
-                    ]
+                            linkIcon: false,
+                        },
+                    ],
                 }}
             />
         );

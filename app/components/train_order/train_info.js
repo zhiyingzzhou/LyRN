@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
     Text,
     Image,
     Dimensions,
-    StyleSheet
+    StyleSheet,
 } from 'react-native';
 
 import TrainDecorator from '../train_decorator';
@@ -19,16 +19,16 @@ const pureText = (content, style, fontSize) => {
     }
 
     if (_.isNumber(style)) {
-        style = [style];
+        style = [style,];
     }
     
     return <Text style={[
-        { color: '#FFF' },
+        { color: '#FFF', },
         ...style,
         {
             fontSize: setSpText(fontSize),
-            lineHeight: setSpText(fontSize)
-        }
+            lineHeight: setSpText(fontSize),
+        },
     ]}>{content}</Text>;
 };
 
@@ -36,7 +36,7 @@ const pureText = (content, style, fontSize) => {
 class TrainInfoComponent extends Component {
 
     static propTypes = {
-        data: PropTypes.object
+        data: PropTypes.object,
     }
 
     state = {}
@@ -46,11 +46,11 @@ class TrainInfoComponent extends Component {
     }
 
     render() {
-        const { width } = Dimensions.get('window');
-        const { bDate = {}, eDate = {} } = this.state;
-        const { data } = this.props;
+        const { width, } = Dimensions.get('window');
+        const { bDate = {}, eDate = {}, } = this.state;
+        const { data, } = this.props;
         const { 
-            fmcity, tocity, fmtime, totime, trainno, usedtime, selectedSeats: { cn, price } 
+            fmcity, tocity, fmtime, totime, trainno, usedtime, selectedSeats: { cn, price, }, 
         } = data;
 
         return (
@@ -63,7 +63,7 @@ class TrainInfoComponent extends Component {
                         height: scaleSize(138),
                         width,
                         top: 0,
-                        left: 0
+                        left: 0,
                     }}
                     resizeMode="cover"
                 />
@@ -72,8 +72,8 @@ class TrainInfoComponent extends Component {
                     styles.item,
                     {
                         alignItems: 'flex-end',
-                        paddingRight: scaleSize(6)
-                    }
+                        paddingRight: scaleSize(6),
+                    },
                 ]}>
                     {pureText(fmcity, styles.station, 17)}
                     {pureText(fmtime, styles.stationTime, 30)}
@@ -87,23 +87,23 @@ class TrainInfoComponent extends Component {
                     styles.item,
                     {
                         alignItems: 'center',
-                        paddingTop: scaleSize(15)
-                    }
+                        paddingTop: scaleSize(15),
+                    },
                 ]}>
                     {pureText(usedtime, 14)}
                     <View style={[
                         styles.stopInfo,
                         {
-                            marginTop: scaleSize(5)
-                        }
+                            marginTop: scaleSize(5),
+                        },
                     ]}>
                         <View style={styles.stopInfoLine}>
                         </View>
                         <View style={{
                             borderWidth: StyleSheet.hairlineWidth,
-                            borderColor: '#FFF'
+                            borderColor: '#FFF',
                         }}>
-                            {pureText('经停信息', { color: '#FFF' }, 14)}
+                            {pureText('经停信息', { color: '#FFF', }, 14)}
                         </View>
                         <View style={styles.stopInfoLine}>
                         </View>
@@ -114,8 +114,8 @@ class TrainInfoComponent extends Component {
                     styles.item,
                     {
                         alignItems: 'flex-start',
-                        paddingLeft: scaleSize(6)
-                    }
+                        paddingLeft: scaleSize(6),
+                    },
                 ]}>
                     {pureText(tocity, styles.station, 17)}
                     {pureText(totime, styles.stationTime, 30)}
@@ -135,11 +135,11 @@ const styles = StyleSheet.create({
         paddingTop: scaleSize(15),
         paddingBottom: scaleSize(15),
         height: scaleSize(138),
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
     },
     item: {
         flex: 1,
-        height: scaleSize(108)
+        height: scaleSize(108),
     },
     station: {
         paddingBottom: scaleSize(10),
@@ -150,24 +150,24 @@ const styles = StyleSheet.create({
     stationDateContainer: {
         flexDirection: 'row',
         alignItems: 'flex-end',
-        marginBottom: scaleSize(12)
+        marginBottom: scaleSize(12),
     },
     stationDate: {
-        marginLeft: scaleSize(10)
+        marginLeft: scaleSize(10),
     },
     stopInfo: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     stopInfoLine: {
         width: scaleSize(20),
         height: StyleSheet.hairlineWidth,
-        backgroundColor: '#FFF'
+        backgroundColor: '#FFF',
     },
     price: {
         position: 'absolute',
-        bottom: 0
-    }
+        bottom: 0,
+    },
 });
 
 export default TrainInfoComponent;

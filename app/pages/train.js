@@ -7,8 +7,8 @@ import {
     InteractionManager
 } from 'react-native';
 
-import BannerComponent from '../components/home/banner';
 import NoticeComponent from '../components/home/notice';
+import BannerComponent from '../components/home/banner';
 import QueryCityComponent from '../components/home/query_city';
 import QueryDateComponent from '../components/home/query_date';
 import CheckboxComponent from '../components/home/checkbox';
@@ -20,7 +20,7 @@ import { getBanner, getNotice, getTab } from '../actions/http';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { selectCity } from '../actions';
+import { switchCity } from '../actions';
 
 class TrainPage extends Component {
 
@@ -30,7 +30,7 @@ class TrainPage extends Component {
         toCity: PropTypes.object,
         tripTime: PropTypes.string,
         tripTimeDesc: PropTypes.string,
-        selectCity: PropTypes.func
+        switchCity: PropTypes.func
     }
 
     state = {
@@ -38,9 +38,6 @@ class TrainPage extends Component {
     }
 
     componentWillMount() {
-        // this.props.getBanner();
-        // this.props.getNotice();
-        // this.props.getTab();
         // 获取通知
         getNotice({
             params: { projectId: 10 },
@@ -94,9 +91,8 @@ class TrainPage extends Component {
     }
 
     render() {
-        const { fromCity, toCity, selectCity, tripTime, tripTimeDesc } = this.props;
+        const { fromCity, toCity, switchCity, tripTime, tripTimeDesc } = this.props;
         const { notice = {}, Adverts = { List: [] }, Icons = { List: [] }, tabIcon: { OperationIcon = [] } } = this.state;
-
         return (
             <ScrollView style={styles.wrap}>
                 <View style={styles.container}>
@@ -109,7 +105,7 @@ class TrainPage extends Component {
                     {/* 查询城市开始  */}
                     <QueryCityComponent
                         toSelectCityPage={(key) => this.toSelectCityPage(key)}
-                        selectCity={selectCity}
+                        switchCity={switchCity}
                         fromCity={fromCity}
                         toCity={toCity}
                         fromKey="trainFromCity"
@@ -149,7 +145,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFF',
     },
-    'checkbox': {
+    checkbox: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginRight: 15,
@@ -167,6 +163,6 @@ const mapStateToProps = (state) => ({
     tripTimeDesc: state.Date.trainTripTimeDesc
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ selectCity }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ switchCity }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrainPage);

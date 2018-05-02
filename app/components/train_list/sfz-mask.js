@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import {
     View,
     Image,
     Modal,
     Dimensions,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 
 export default class SfzMaskComponent extends Component {
 
     state = {
-        modalVisible: false
+        modalVisible: false,
     }
 
     render() {
-        const { height } = Dimensions.get('window');
-        const { modalVisible } = this.state;        
+        const { height, } = Dimensions.get('window');
+        const { modalVisible, } = this.state;        
 
         return (
             <Modal
                 visible={modalVisible}
                 transparent={true}
-                onRequestClose ={() => {}}
+                // onRequestClose ={() => {}}
             >
                 <View
                     style={{
                         flex: 1,
                         backgroundColor: 'rgba(0,0,0,.8)',
-                        alignItems: 'center'
+                        alignItems: 'center',
                     }}
                 >
                     <Image 
@@ -35,13 +35,13 @@ export default class SfzMaskComponent extends Component {
                         style={{
                             width: scaleSize(228),
                             height: scaleSize(272),
-                            marginTop: scaleSize(height * 0.1)
+                            marginTop: scaleSize(height * 0.1),
                         }}
                     />
                     <TouchableOpacity
                         onPress={() => {
                             requestAnimationFrame(() => {
-                                this.setState({ modalVisible: false });
+                                this.setState({ modalVisible: false, });
                             });
                         }}
                     >
@@ -50,7 +50,7 @@ export default class SfzMaskComponent extends Component {
                             style={{
                                 width: scaleSize(115),
                                 height: scaleSize(50),
-                                marginTop: scaleSize(height * 0.2)
+                                marginTop: scaleSize(height * 0.2),
                             }}
                         />
                     </TouchableOpacity>

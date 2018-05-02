@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     FlatList,
-    Dimensions
+    Dimensions,
 } from 'react-native';
 
 import ItemComponent from './item';
@@ -12,11 +12,16 @@ export default class ListComponent extends Component {
     static propTypes = {
         data: PropTypes.object,
         length: PropTypes.number,
-        parentContext: PropTypes.object
+        parentContext: PropTypes.object,
+    }
+
+    static defaultProps = {
+        data: {
+        },
     }
 
     state = {
-        length: 10
+        length: 10,
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -24,8 +29,8 @@ export default class ListComponent extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.data.trainlist !== this.props.data.trainlist) {
-            this.setState({ length: 10 });
+        if (nextProps.data && nextProps.data.trainlist !== this.props.data.trainlist) {
+            this.setState({ length: 10, });
         }
     }
     
@@ -42,12 +47,12 @@ export default class ListComponent extends Component {
     }
 
     onEndReached = () => {
-        const { data: { trainlist } } = this.props;
-        const { length } = this.state;
+        const { data: { trainlist, }, } = this.props;
+        const { length, } = this.state;
 
         if (length < trainlist.length) { 
             this.setState({
-                length: length + 10
+                length: length + 10,
             }); 
         }
     }
@@ -57,10 +62,10 @@ export default class ListComponent extends Component {
     }
 
     render() {
-        const { width } = Dimensions.get('window');
-        const { length } = this.state;
-        const { data } = this.props;
-        const { tcount = 0, trainlist = [] } = data;
+        const { width, } = Dimensions.get('window');
+        const { length, } = this.state;
+        const { data = {}, } = this.props;
+        const { tcount = 0, trainlist = [], } = data;
 
         if (tcount === 0) {
             return null;
@@ -83,7 +88,7 @@ export default class ListComponent extends Component {
                 getItemLayout={(data, index) => ({
                     length: scaleSize(100),
                     offset: scaleSize(100) * index,
-                    index
+                    index,
                 })}
             />
         );

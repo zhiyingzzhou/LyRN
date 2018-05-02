@@ -1,38 +1,38 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     StyleSheet,
     Image,
     Text,
     View,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 
 export default class CheckboxComponent extends Component {
     static propTypes = {
         title: PropTypes.oneOfType([
             PropTypes.element, 
-            PropTypes.string
+            PropTypes.string,
         ]),
         activeOpacity: PropTypes.number,
         onChange: PropTypes.func,
-        name: PropTypes.string
+        name: PropTypes.string,
     }
 
     state = {
-        checked: false
+        checked: false,
     }
 
     checkboxMap = {
         false: require('../../images/checkbox.png'),
-        true: require('../../images/checkbox_active.png')
+        true: require('../../images/checkbox_active.png'),
     }
 
     handleCheckbox = () => {
-        const { onChange, name = '' } = this.props;
+        const { onChange, name = '', } = this.props;
 
         this.setState({
-            checked: !this.state.checked
+            checked: !this.state.checked,
         });
 
         if (onChange && name !== '') {
@@ -41,8 +41,8 @@ export default class CheckboxComponent extends Component {
     }
 
     render() {
-        const { checked } = this.state;
-        const { title = '', activeOpacity = 0.6 } = this.props;
+        const { checked, } = this.state;
+        const { title = '', activeOpacity = 0.6, } = this.props;
         
         return (
             <TouchableOpacity
@@ -64,7 +64,7 @@ export default class CheckboxComponent extends Component {
 const styles = StyleSheet.create({
     'checkbox_item': {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     'checkbox_txt': {
         fontSize: setSpText(14),
@@ -74,6 +74,6 @@ const styles = StyleSheet.create({
     'checkbox_image': {
         width: scaleSize(18),
         height: scaleSize(18),
-        marginLeft: scaleSize(3)
-    }
+        marginLeft: scaleSize(3),
+    },
 });

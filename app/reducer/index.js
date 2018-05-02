@@ -1,12 +1,12 @@
 import { handleAction } from 'redux-actions';
 import { combineReducers } from 'redux';
-import { selectCity, selectDate } from '../actions';
+import { switchCity, selectDate } from '../actions';
 import date from '../util/date';
 
 const tripTime = date.format(date.getTomorrow());
 
 const City = handleAction(
-    selectCity, 
+    switchCity, 
     (state, { payload }) => Object.assign({}, state, { ...payload }), 
     { 
         trainFromCity: { Name: '上海' }, 

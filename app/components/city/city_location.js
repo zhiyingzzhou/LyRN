@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
     Text,
     StyleSheet,
     Dimensions,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 
 import config from '../../config';
-import { getCurrentCity } from '../../actions/http';
+import { getCurrentCity, } from '../../actions/http';
 
 export default class CityLoctionComponent extends Component {
 
     static propTypes = {
-        handlePress: PropTypes.func
+        handlePress: PropTypes.func,
     }
 
     state = {
-        regeocode: {}
+        regeocode: {},
     };
 
     componentWillMount() {
@@ -28,18 +28,18 @@ export default class CityLoctionComponent extends Component {
     getCurrentPosition() {
         try {
             navigator.geolocation.getCurrentPosition((location) => {
-                const { longitude, latitude } = location.coords;
+                const { longitude, latitude, } = location.coords;
 
                 getCurrentCity({
                     params: {
                         key: config.key,
-                        location: `${longitude},${latitude}`
+                        location: `${longitude},${latitude}`,
                     },
-                    callback: ({ regeocode }) => {
+                    callback: ({ regeocode, }) => {
                         this.setState({
-                            regeocode
+                            regeocode,
                         });
-                    }
+                    },
                 });
             });
         } catch (e) {
@@ -48,15 +48,15 @@ export default class CityLoctionComponent extends Component {
     }
 
     handlePress(Name) {
-        const { handlePress } = this.props;
+        const { handlePress, } = this.props;
 
-        handlePress && handlePress({ Name });
+        handlePress && handlePress({ Name, });
     }
 
     render() {
-        const { width } = Dimensions.get('window'),
-            { addressComponent = {} } = this.state.regeocode,
-            { province = '' } = addressComponent,
+        const { width, } = Dimensions.get('window'),
+            { addressComponent = {}, } = this.state.regeocode,
+            { province = '', } = addressComponent,
             cityName = province.replace(/市/g, '');
 
         if (cityName === '') { 
@@ -71,8 +71,8 @@ export default class CityLoctionComponent extends Component {
                     <View style={[
                         styles.city_item,
                         {
-                            width: (width - 30) * 0.43
-                        }
+                            width: (width - 30) * 0.43,
+                        },
                     ]}>
                         <Text
                             style={styles.city_txt}
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         paddingBottom: scaleSize(6),
         paddingLeft: scaleSize(15),
         paddingRight: scaleSize(15),
-        backgroundColor: '#FFF'
+        backgroundColor: '#FFF',
     },
     'city_item': {
         height: scaleSize(35),
@@ -100,10 +100,10 @@ const styles = StyleSheet.create({
         borderColor: '#dedfe0',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 5
+        borderRadius: 5,
     },
     'city_txt': {
         fontSize: setSpText(14),
-        color: '#2d2d2d'
-    }
+        color: '#2d2d2d',
+    },
 });

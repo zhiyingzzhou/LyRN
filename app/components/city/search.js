@@ -1,5 +1,5 @@
 /* eslint-disable no-debugger */
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import {
     View,
     Text,
@@ -7,7 +7,7 @@ import {
     StyleSheet,
     Image,
     Dimensions,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 
 import _ from '../../util';
@@ -21,31 +21,31 @@ export default class SearchComponent extends Component {
     state = {
         offsetWidth: 16,
         isFocus: false, // 输入框是否聚焦
-        hasContent: false // 输入框是否有内容
+        hasContent: false, // 输入框是否有内容
     }
 
     handleFocus = () => {
         this.setState({
             offsetWidth: searchCancelWidth + 8,
-            isFocus: true
+            isFocus: true,
         });
     }
 
     handleBlur = () => {
         this.setState({
             offsetWidth: 16,
-            isFocus: false
+            isFocus: false,
         });
     }
 
     setContent = (field, val) => {
         this.setState({
-            [field]: val
+            [field]: val,
         });
     }
 
     handleChangeText = (text) => {
-        const { hasContent } = this.state;
+        const { hasContent, } = this.state;
 
         text = text.trim();
         if (!hasContent && text.length > 0) {
@@ -67,7 +67,7 @@ export default class SearchComponent extends Component {
     }
 
     cancelInput = () => {
-        const { hasContent } = this.state;
+        const { hasContent, } = this.state;
 
         if (hasContent) {
             this.cleanInput();
@@ -78,22 +78,22 @@ export default class SearchComponent extends Component {
 
     render() {
         const
-            { width } = Dimensions.get('window'),
-            { offsetWidth, isFocus, hasContent } = this.state,
+            { width, } = Dimensions.get('window'),
+            { offsetWidth, isFocus, hasContent, } = this.state,
             innerWidth = width - offsetWidth;
 
         return (
-            <View style={[styles.search_wrap]}>
+            <View style={[styles.search_wrap,]}>
                 {/* 搜索输入框开始 */}
                 <View style={[
                     styles.search_inner,
                     {
                         width: innerWidth,
-                        marginLeft: scaleSize(8)
-                    }
+                        marginLeft: scaleSize(8),
+                    },
                 ]}>
                     {/* 搜索图标开始 */}
-                    <View style={[styles.search_icon]}>
+                    <View style={ [styles.search_icon,] }>
                         <Image
                             style={styles.search_image}
                             source={require('../../images/search.png')}
@@ -112,7 +112,7 @@ export default class SearchComponent extends Component {
                         onChangeText={_.debounce(this.handleChangeText.bind(this), 500)}
                         style={[
                             styles.search_input,
-                            { width: innerWidth - searchIconWidth }
+                            { width: innerWidth - searchIconWidth, },
                         ]}
                     />
                     {
@@ -137,7 +137,7 @@ export default class SearchComponent extends Component {
                             style={styles.search_cancel}
                             onPress={this.cancelInput}
                         >
-                            <Text style={{ color: '#2d2d2d' }}>
+                            <Text style={{ color: '#2d2d2d', }}>
                                 取消
                             </Text>
                         </TouchableOpacity>
@@ -155,39 +155,39 @@ const styles = StyleSheet.create({
     'search_wrap': {
         height: scaleSize(56),
         justifyContent: 'center',
-        backgroundColor: '#ededed'
+        backgroundColor: '#ededed',
     },
     'search_inner': {
         flexDirection: 'row',
         height: scaleSize(40),
         backgroundColor: '#FFF',
-        borderRadius: 5
+        borderRadius: 5,
     },
     'search_icon': {
         width: searchIconWidth,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     'search_image': {
         width: searchImageWidth,
-        height: scaleSize(28)
+        height: scaleSize(28),
     },
     'search_input': {
         padding: scaleSize(0),
         fontSize: setSpText(14),
-        height: scaleSize(40)
+        height: scaleSize(40),
     },
     'search_clear_wrap': {
         position: 'absolute',
         right: scaleSize(10),
         width: scaleSize(20),
         height: scaleSize(40),
-        alignItems: 'center'
+        alignItems: 'center',
     },
     'search_clear': {
         width: scaleSize(20),
         height: scaleSize(20),
-        top: scaleSize(10)
+        top: scaleSize(10),
     },
     'search_cancel': {
         position: 'absolute',
@@ -195,6 +195,6 @@ const styles = StyleSheet.create({
         width: searchCancelWidth,
         right: scaleSize(0),
         justifyContent: 'center',
-        alignItems: 'center'
-    }
+        alignItems: 'center',
+    },
 });

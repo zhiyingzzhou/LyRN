@@ -1,16 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     StyleSheet,
-    Text
+    Text,
 } from 'react-native';
 
 export default class NoticeComponent extends Component {
     static propTypes = {
-        data: PropTypes.object
+        data: PropTypes.object,
     }
     render() {
-        const { data } = this.props;
+        const { data, } = this.props;
+
+        if (!data.Entity || !data.Entity.NCTitle) {
+            return null;
+        }
         
         return (
             <Text style={styles.notice} numberOfLines={1}>

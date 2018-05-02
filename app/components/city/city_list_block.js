@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
     Text,
     StyleSheet,
     TouchableOpacity,
-    Dimensions
+    Dimensions,
 } from 'react-native';
 
 export default class CityListBlock extends Component {
 
     static defaultProps = {
-        data: []
+        data: [],
     }
 
     static propTypes = {
         data: PropTypes.array,
-        handlePress: PropTypes.func
+        handlePress: PropTypes.func,
     }
 
     handlePress = (data) => {
-        const { handlePress } = this.props;
+        const { handlePress, } = this.props;
 
         handlePress && handlePress(data); // eslint-disable-line
     }
@@ -40,8 +40,8 @@ export default class CityListBlock extends Component {
                     {
                         marginTop: index < 3 ? 0 : this.itemGutter,
                         marginLeft: index % 3 === 0 ? this.gutter : this.itemGutter,
-                        width: this.itemWidth
-                    }
+                        width: this.itemWidth,
+                    },
                 ]}
                 onPress={() => {
                     this.handlePress(data); 
@@ -53,8 +53,8 @@ export default class CityListBlock extends Component {
     }
 
     render() {
-        const { width } = Dimensions.get('window');
-        const { data } = this.props;
+        const { width, } = Dimensions.get('window');
+        const { data, } = this.props;
 
         this.gutter = width * 0.1 / 2;
         this.innerWidth = width * 0.9;
@@ -66,8 +66,8 @@ export default class CityListBlock extends Component {
                 styles.container,
                 {
                     paddingTop: this.gutter,
-                    paddingBottom: this.gutter
-                }
+                    paddingBottom: this.gutter,
+                },
             ]}>
                 {data.map(this._renderItem)}
             </View>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     'container': {
         backgroundColor: '#FFF',
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
     },
     'item': {
         height: scaleSize(35),
@@ -87,10 +87,10 @@ const styles = StyleSheet.create({
         borderColor: '#dedfe0',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 5
+        borderRadius: 5,
     },
     'txt': {
         fontSize: setSpText(14),
-        color: '#2d2d2d'
-    }
+        color: '#2d2d2d',
+    },
 });

@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import {
     View,
     Image,
     Dimensions,
     StatusBar,
-    Platform
+    Platform,
 } from 'react-native';
 
 export default class LoadingComponent extends Component {
 
     render() {
-        const { width, height } = Dimensions.get('window');
+        const { width, height, } = Dimensions.get('window');
 
         return (
             <View style={{
@@ -20,14 +20,14 @@ export default class LoadingComponent extends Component {
                 top: 0,
                 left: 0,
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
             }}>
                 <Image
                     source={require('../../images/gif-loading.gif')}
                     style={{
                         width: scaleSize(150),
                         height: scaleSize(150),
-                        marginTop: -scaleSize(75)
+                        marginTop: -scaleSize(75),
                     }}
                 />
             </View>

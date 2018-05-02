@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, } from 'react-native';
 import _ from '../../util';
 
 export default class OperationComponent extends Component {
 
     static propTypes = {
-        data: PropTypes.array
+        data: PropTypes.array,
     }
 
     shouldComponentUpdate(nextProps) {
@@ -18,13 +18,15 @@ export default class OperationComponent extends Component {
             <View style={styles.row} key={index}>
                 {
                     rowData.map((item) => {
-                        const { ICImageUrl, ICSubScriptUrl, IsSubscriptShow, ICTitle } = item;
+                        const { ICImageUrl, ICSubScriptUrl, IsSubscriptShow, ICTitle, } = item;
 
-                        return <View style={styles.row_item} key={ICImageUrl}>
-                            <Image style={styles.image} source={{ uri: ICImageUrl }} />
-                            {ICSubScriptUrl !== '' && IsSubscriptShow && <Image style={styles.sub_image} source={{ uri: ICSubScriptUrl }}/>}
-                            <Text style={styles.txt}>{ICTitle}</Text>
-                        </View>;
+                        return (
+                            <View style={styles.row_item} key={ICImageUrl}>
+                                <Image style={styles.image} source={{ uri: ICImageUrl.replace(/http/, 'https'), }} />
+                                {ICSubScriptUrl !== '' && IsSubscriptShow && <Image style={styles.sub_image} source={{ uri: ICSubScriptUrl.replace(/http/, 'https'), }}/>}
+                                <Text style={styles.txt}>{ICTitle}</Text>
+                            </View>
+                        );
                     })
                 }
             </View>
@@ -32,7 +34,7 @@ export default class OperationComponent extends Component {
     }
 
     render() {
-        const { data } = this.props;
+        const { data, } = this.props;
 
         return (
             <View style={styles.box}>
@@ -45,31 +47,31 @@ export default class OperationComponent extends Component {
 const styles = StyleSheet.create({
     box: {
         marginTop: -scaleSize(15),
-        paddingBottom: scaleSize(22)
+        paddingBottom: scaleSize(22),
     },
     row: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     'row_item': {
         flex: 1,
         alignItems: 'center',
-        marginTop: scaleSize(20)
+        marginTop: scaleSize(20),
     },
     image: {
         width: scaleSize(24),
-        height: scaleSize(24)
+        height: scaleSize(24),
     },
     'sub_image': {
         position: 'absolute',
         width: scaleSize(31),
         height: scaleSize(14),
         right: scaleSize(3),
-        top: -scaleSize(5)
+        top: -scaleSize(5),
     },
     txt: {
         fontSize: setSpText(11),
         color: '#666',
         marginTop: scaleSize(5),
         lineHeight: scaleSize(11),
-    }
+    },
 });

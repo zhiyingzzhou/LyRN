@@ -167,7 +167,6 @@ class CityPage extends Component {
                     <CityLocationComponent
                         handlePress={(data) => this.selectCity(true, data)}
                     />
-
                     {historycities.length === 0 ? null
                         : <CityListTitle title="历史选择" />}
                     {historycities.length === 0 ? null
