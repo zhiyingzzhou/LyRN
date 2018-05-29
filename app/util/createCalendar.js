@@ -1,40 +1,32 @@
 module.exports = {
     startDate: new Date(),
-    endDate: '',
-    month: '',
-    year: '',
     calendar: [],
-    init(startDate, endDate) {
+    init(startDate) {
         if (this.calendar.length > 0) {
             return this.calendar;
         }
         this.startDate = startDate ? startDate : this.startDate;
-        this.endDate = endDate && endDate !== '' ? endDate : new Date(Number(this.startDate) + 5356.8e6);
-        this.year = this.startDate.getFullYear();
-        this.month = this.startDate.getMonth() + 1;
         this.createCalendar();
 
         return this.calendar;
     },
     createCalendar() {
-        const endYear = this.endDate.getFullYear(); // 获取结束年份
-        const endMonth = this.endDate.getMonth() + 1; // 获取结束月份
-        const monthNum = (endYear - this.year) * 12 + endMonth - this.month;
+        const startYear = this.startDate.getFullYear(); // 获取开始年份
+        const startMonth = this.startDate.getMonth() + 1; // 获取开始月份
 
-        for (let i = 0; i <= monthNum; i++) {
-            const idx = this.month + i;
-            const month = idx - Math.floor((idx - 1) / 12) * 12;
-            const year = Math.floor((idx - 1) / 12) + this.year;
-            const monthObj = {
-                year: '',
-                month: '',
-                dayList: []
-            };
+        for (let i = 0; i <= 2; i++) {
+            let year = startYear,
+            month = startMonth + i;
+            if(month > 12) {
+                year = year !== startYear || year + 1;
+                month = month - 12;
+            }
 
-            monthObj.year = year;
-            monthObj.month = month;
-            monthObj.dayList = this.createDayList(year, month);
-            this.calendar.push(monthObj);
+            this.calendar[i] = {
+                year,
+                month,
+                dayList: this.createDayList(year, month)
+            };;
         }
     },
 
@@ -49,18 +41,20 @@ module.exports = {
         const dayList = [];
         const dayNumofMonth = this.getDayNum(year, month); // 获取当前月份的总天数
         const weekofFirstDay = new Date(year, month - 1, 1).getDay(); // 获取当前月的第一天是星期几
-        const total = dayNumofMonth + weekofFirstDay;
-        const rest = 7 * Math.ceil(total / 7) - total;
+        const num = dayNumofMonth + weekofFirstDay;
+        const total = Math.ceil(num / 7) * 7; // 所需单元格总数 
 
-        for (let i = 0; i < weekofFirstDay; i++) {
-            dayList.push(null);
-        }
-        for (let i = 1; i <= dayNumofMonth; i++) {
-            dayList.push(i);
-        }
-
-        for (let i = 0; i < rest; i++) {
-            dayList.push(null);
+        let day = 0;
+        
+        for( let i=0; i< total; i++ ){
+            if(i < weekofFirstDay ) {
+                dayList[i] = null;
+            } else if(i < num) {
+                day += 1;
+                dayList[i] = day;
+            } else {
+                dayList[i] = null;
+            }
         }
 
         return dayList;

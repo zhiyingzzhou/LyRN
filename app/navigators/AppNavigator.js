@@ -215,7 +215,7 @@ const AppNavigator = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'Calendar',
+        initialRouteName: 'Main',
         cardStyle: {
             shadowOpacity: 0 // 去除顶部阴影
         },
