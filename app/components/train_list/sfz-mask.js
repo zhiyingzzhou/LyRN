@@ -21,7 +21,7 @@ export default class SfzMaskComponent extends Component {
             <Modal
                 visible={modalVisible}
                 transparent={true}
-                // onRequestClose ={() => {}}
+                onRequestClose ={() => {}}
             >
                 <View
                     style={{

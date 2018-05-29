@@ -184,8 +184,7 @@ export default class ItemComponent extends Component {
 
     _renderContent = () => {
         const { topHeight, bottomHeight, height, } = this.state;
-        const { data, } = this.props;
-
+        const { data, navigation } = this.props;
         // accbyidcard 是否可以通过刷身份证进站
         // fmcity 起始站
         // tocity 终止站
@@ -248,7 +247,8 @@ export default class ItemComponent extends Component {
                                 style={{
                                     width: cardScale * 12,
                                     height: scaleSize(12),
-                                    marginLeft: 4,
+                                    marginLeft: scaleSize(4),
+                                    marginBottom: scaleSize(5)
                                 }}
                                 source={require('../../images/idcard.png')}
                             /> : null}
@@ -258,6 +258,7 @@ export default class ItemComponent extends Component {
                             style={{
                                 width: scaleSize(61),
                                 height: scaleSize(61) / lineScale,
+                                marginBottom: scaleSize(6)
                             }}
                             source={require('../../images/right_line.png')}
                         />
@@ -316,7 +317,7 @@ export default class ItemComponent extends Component {
                             },
                         ]}
                     >
-                        <SeatsDetailComponent data={data} seatsMap={seatsMap} />
+                        <SeatsDetailComponent data={data} seatsMap={seatsMap} navigation={navigation} />
                     </Animated.View>
                 </Animated.View>
             </View>

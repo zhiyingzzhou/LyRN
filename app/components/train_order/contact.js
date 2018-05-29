@@ -11,10 +11,6 @@ import ListItemComponent from '../list_item';
 
 export default class ContactComponent extends Component {
 
-    static contextTypes = {
-        navigation: PropTypes.object,
-    }
-
     static propTypes = {
     }
 
@@ -89,7 +85,7 @@ export default class ContactComponent extends Component {
                     list: [
                         {  
                             onPress: () => {
-                                this.context.navigation.navigate('Contact');
+                                this.props.navigation.navigate('Contact');
                             },
                             title: this.addPeople(),
                         },

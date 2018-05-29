@@ -39,6 +39,7 @@ export default class ListComponent extends Component {
             parentContext={this.props.parentContext}
             viewWidth={this.width} 
             data={data}
+            navigation={this.props.navigation}
         />;
     }
 

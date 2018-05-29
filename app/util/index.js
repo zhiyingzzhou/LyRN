@@ -116,6 +116,10 @@ Util.prototype.getLayout = function (ref) {
     });
 };
 
+Util.prototype.http2s = function (url) {
+    return url ? url.replace(/http/, 'https') : '';
+}
+
 const _ = new Util();
 
 export default _;

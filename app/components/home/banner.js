@@ -8,6 +8,8 @@ import {
 
 import Swiper from 'react-native-swiper';
 
+import util from '../../util';
+
 const bannerHeight = scaleSize(116);
 
 export default class BannerComponent extends Component {
@@ -39,7 +41,7 @@ export default class BannerComponent extends Component {
                         
                         return (
                             <View style={styles.slide} key={index}>
-                                <Image resizeMode ="stretch" style={styles.image} source={{ uri: ACImageUrl.replace(/http/, 'https'), }} />
+                                <Image resizeMode ="stretch" style={styles.image} source={{ uri: util.http2s(ACImageUrl), }} />
                             </View>
                         );
                     })

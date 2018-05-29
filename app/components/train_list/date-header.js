@@ -19,11 +19,8 @@ const themeColor = '#3C6';
 
 class DateHeaderComponent extends Component {
 
-    static contextTypes = {
-        navigation: PropTypes.object,
-    }
-
     static propTypes = {
+        navigation: PropTypes.object,
         trainlistTime: PropTypes.string,
         getTrainList: PropTypes.func,
     };
@@ -40,8 +37,7 @@ class DateHeaderComponent extends Component {
 
     componentWillMount() {
         this.todayTimeStamp = date.getToday(); // 提前存储当日的时间戳
-
-        const { navigation: { state: { params: { tripTime, }, }, }, } = this.context;
+        const { navigation: { state: { params: { tripTime, }, }, }, } = this.props;
         // 将当前选择的时间戳存入数组
 
         this.setState({
@@ -151,7 +147,7 @@ class DateHeaderComponent extends Component {
         const { index, dayArr, } = this.state;
 
         requestAnimationFrame(() => {
-            this.context.navigation.navigate('Calendar', {
+            this.props.navigation.navigate('Calendar', {
                 key: 'trainlistTime',
                 selectedTime: dayArr[index],
             });

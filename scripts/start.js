@@ -20,8 +20,6 @@ const content = tplEngine(tpl, {
     gradlePath
 });
 
-
-
 fs.writeFile(`${nodeWorkPath}/android/gradle/wrapper/gradle-wrapper.properties`, content, function(err) {
     if(err) throw err;
 

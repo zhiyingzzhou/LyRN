@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-native';
 import { connect } from 'react-redux';
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import { createTabNavigator, createStackNavigator } from 'react-navigation';
 
 import ShopMallView from '../views/shopmall'; // 商城页面
 import ProfileView from '../views/profile'; // 我的页面
@@ -21,7 +21,7 @@ import OnlineSelectSeatPage from '../pages/online_select_seat'; // 在线选座
 
 import backNavbar from '../components/back_navbar';
 
-const HomeTabNavigator = TabNavigator(
+const HomeTabNavigator = createTabNavigator(
     {
         Train: {
             screen: TrainPage,
@@ -148,9 +148,10 @@ MainRouterKeys.forEach((key) => {
     MainRouterConfigs[key] = generateMainRouteConfig(MainNavigatorMapObj[key]);
 });
 
-export const MainNavigator = TabNavigator(MainRouterConfigs, MainTabNavigatorConfig);
+export const MainNavigator = createTabNavigator(MainRouterConfigs, MainTabNavigatorConfig);
+import order from './order';
 
-const AppNavigator = StackNavigator(
+const AppNavigator = createStackNavigator(
     {
         'Main': { // 首页
             screen: MainNavigator,
@@ -214,85 +215,12 @@ const AppNavigator = StackNavigator(
         }
     },
     {
-        initialRouteName: 'Main',
-        initialRouteParams1: { from: { Name: '上海' }, to: { Name: '北京' }, tripTime: '2017-10-10' }, // eslint-disable-line
-        initialRouteParams: { data: { 'trainno': 'G102',
-            'fmtime': '06:30',
-            'fmtimeps': 630, 
-            'totime': '12:18', 
-            'totimeps': 1218, 
-            'bgplace': '上海虹桥',
-            'endplace': '北京南', 
-            'fmcity': '上海虹桥', 
-            'fmcitypy': 'shanghaihongqiao',
-            'tocity': '北京南',
-            'tocitypy': 'beijingnan', 
-            'usedtime': '5小时48分钟', 
-            'usedtimeps': 348, 
-            'fmtype': 0,
-            'totype': 2,
-            'ifbook': 1,
-            'priority': 0, 
-            'sort': 'GD',
-            'note': '', 
-            'notetype': 0,
-            'notetime': '', 
-            'ticketstatus': { 'secseats': { 'cn': '二等座', 
-                'price': 553, 
-                'state': 1, 
-                'seats': '99', 
-                'isorder': '1', 
-                'upPrice': 0, 
-                'midPrice': 0, 
-                'downPrice': 0 }, 
-            'firtseats': { 'cn': '一等座', 
-                'price': 933,
-                'state': 1,
-                'seats': '99', 
-                'isorder': '1', 
-                'upPrice': 0, 
-                'midPrice': 0, 
-                'downPrice': 0 },
-            'busseats': { 'cn': '商务座',
-                'price': 1748,
-                'state': 1,
-                'seats': '99', 
-                'isorder': '1',
-                'upPrice': 0, 
-                'midPrice': 0, 
-                'downPrice': 0 }, 
-            'specseats': null, 
-            'hardseats': null, 
-            'noseats': { 'cn': '无座', 
-                'price': 553,
-                'state': 0,
-                'seats': '0', 
-                'isorder': '1', 
-                'upPrice': 0,
-                'midPrice': 0, 
-                'downPrice': 0 }, 
-            'hardslp': null, 
-            'softslp': null, 
-            'softsleeperdown': null, 
-            'advancedsoftsleeper': null, 
-            'dsleeperdown': null }, 
-            'isbook': 1, 
-            'bothmile': 0, 
-            'accbyidcard': 1, 
-            'trianid': 1, 
-            'trainflag': '0', 
-            'trainflagmsg': '正常车次，不受控',
-            'selectedSeats': { 'cn': '二等座',
-                'price': 553, 
-                'state': 1, 
-                'seats': '99',
-                'isorder': '1', 
-                'upPrice': 0, 
-                'midPrice': 0, 
-                'downPrice': 0 } } },
+        initialRouteName: 'Calendar',
         cardStyle: {
             shadowOpacity: 0 // 去除顶部阴影
-        }
+        },
+        initialRouteParams: { from: { Name: '上海' }, to: { Name: '北京' }, tripTime: '2018-05-30' }, // eslint-disable-line
+        initialRouteParams1: order
     }
 );
 

@@ -22,29 +22,31 @@ export default class CityLoctionComponent extends Component {
     };
 
     componentWillMount() {
-        // this.getCurrentPosition();
+        this.getCurrentPosition();
     }
 
     getCurrentPosition() {
-        try {
-            navigator.geolocation.getCurrentPosition((location) => {
-                const { longitude, latitude, } = location.coords;
+        //     console.warn(`Emulator device is't support getCurrentPosition method!`);
+        //     return ;
+        // }
+        // try {
+        //     navigator.geolocation.getCurrentPosition(location => {
+        //         const { longitude, latitude, } = location.coords;
 
-                getCurrentCity({
-                    params: {
-                        key: config.key,
-                        location: `${longitude},${latitude}`,
-                    },
-                    callback: ({ regeocode, }) => {
-                        this.setState({
-                            regeocode,
-                        });
-                    },
-                });
-            });
-        } catch (e) {
-            console.warn(e);
-        }
+        //         getCurrentCity({
+        //             params: {
+        //                 key: config.key,
+        //                 location: `${longitude},${latitude}`,
+        //             },
+        //             callback: ({ regeocode, }) => {
+        //                 this.setState({
+        //                     regeocode,
+        //                 });
+        //             },
+        //         });
+        //     });
+        // } catch (e) {
+        //     console.wran(e);
     }
 
     handlePress(Name) {

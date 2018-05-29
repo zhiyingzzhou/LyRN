@@ -1,13 +1,13 @@
 import { ajaxByGet, } from '../services/ajax';
 
-const getFullUri = (type, uri) => {
-    return type ? `https://wx.17u.cn/${uri}` : uri;
+const getFullUri = uri => {
+    return `https://wx.17u.cn/${uri}`;
 };
 
 // 获取banner
 export const getBanner = ({ params, that, }) => {
     ajaxByGet(
-        getFullUri(1, 'pubapi/home/Commercial.ashx'),
+        getFullUri('pubapi/home/Commercial.ashx'),
         params,
         ({ Adverts, Icons, }) => {
             that.setState({
@@ -21,7 +21,7 @@ export const getBanner = ({ params, that, }) => {
 // 获取notice
 export const getNotice = ({ params, that, }) => {
     ajaxByGet(
-        getFullUri(1, 'pubapi/home/notice.ashx'),
+        getFullUri('pubapi/home/notice.ashx'),
         params, 
         ({ Notice, }) => {
             that.setState({
@@ -33,7 +33,7 @@ export const getNotice = ({ params, that, }) => {
 
 export const getTab = ({ params, that, }) => {
     ajaxByGet(
-        getFullUri(1, 'pubapi/home/tabicon.ashx'),
+        getFullUri('pubapi/home/tabicon.ashx'),
         params, 
         (tabIcon) => {
             that.setState({
@@ -55,16 +55,29 @@ export const getHotCities = ({ params, callback, }) => {
 // 通过大写拼音字母获取城市列表
 export const getCityListByLetter = ({ params, callback, }) => {
     ajaxByGet(
-        getFullUri(1, 'uniontrain/trainapi/GetCityStationList'),
+        getFullUri('uniontrain/trainapi/GetCityStationList'),
         params, 
         callback
     );
 };
 
+// para: { 
+//     'from': from.Name,
+//     'to': to.Name, 
+//     'oby': '0', 
+//     date,
+//     'platId': 432, 
+//     'requestType': 4,
+//     'headct': 1, 
+//     'headus': 1, 
+//     'headver': '2.14.0.2', 
+//     'isstu': false, 
+//     'headtime': Number(new Date()), 
+// },
 // 获取火车时刻表
 export const getTrainList = ({ params, callback, }) => {
     ajaxByGet(
-        getFullUri(1, 'uniontrain/trainapi/searchno.html'),
+        getFullUri('uniontrain/trainapi/searchno.html'),
         params, 
         callback
     );

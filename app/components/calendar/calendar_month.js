@@ -21,10 +21,6 @@ export default class CalendarMonthComponent extends Component {
         data: [],
     }
 
-    static contextTypes = {
-        navigation: PropTypes.object,
-    }
-
     static propTypes = {
         data: PropTypes.array,
         onSelect: PropTypes.func,
@@ -209,7 +205,7 @@ export default class CalendarMonthComponent extends Component {
     render() {
         const { width, } = Dimensions.get('window');
         const { data, dayMap, } = this.props;
-        const { navigation: { state: { params: { selectedTime, }, }, }, } = this.context;
+        const { navigation: { state: { params: { selectedTime, }, }, }, } = this.props;
 
         this.selectedTime = selectedTime; // 上一次选择的时间
         this.dayMap = dayMap;

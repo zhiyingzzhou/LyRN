@@ -1,4 +1,4 @@
-import React, { Component, } from 'react';
+import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
@@ -15,15 +15,9 @@ import Loading2Component from '../components/loading';
 
 import { getTrainList, } from '../actions/http';
 
+import fakeData from '../fake/trainlist';
+
 export default class TrainListPage extends Component {
-
-    childContextTypes= {
-        navigation: PropTypes.object,
-    }
-
-    getChildContext= {
-        navigation: this.props.navigation,
-    }
 
     static navigationOptions = ({ navigation, }) => {
         const { state: { params: { from, to, }, }, } = navigation;        
@@ -73,48 +67,49 @@ export default class TrainListPage extends Component {
             expires: null,
         });
         
-        getTrainList({
-            params: {
-                para: { 
-                    'from': from.Name,
-                    'to': to.Name, 
-                    'oby': '0', 
-                    date,
-                    'platId': 501, 
-                    'requestType': 4,
-                    'headct': 1, 
-                    'headus': 1, 
-                    'headver': '2.14.0.2', 
-                    'isstu': false, 
-                    'headtime': Number(new Date()), 
-                },
-            },
-            callback: ({ data, }) => {
-                if (this.hasChildOpen) { // itemCompnent子组件的上下文
-                    this.childContext.close(); 
-                }
-                setTimeout(() => {
-                    if (this.state.showLoading1) {
-                        this.setState({
-                            showLoading1: false,
-                        });
-                    }
-                    this.setState({ 
-                        data,
-                        showLoading2: false,
-                    });
-                }, 500);
-            },
-        });
+        // getTrainList({
+        //     params: {
+        //         para:{
+        //             "TimeStamp": 1527576421.705,
+        //             "ConstId": "5b0cf720cid8uOBPRHMAgXCqkmEoP6Ir5A8w46i1",
+        //             "PlatId": 432,
+        //             "From": "上海",
+        //             "To": "北京",
+        //             "Date": "2018-05-30",
+        //             "OrderBy": 0,
+        //             "IsStudent": false,
+        //             "TrainNo": ""
+        //         },
+        //         sign: 'c1899d2506b2631bc4b8e1357a10b613'
+        //     },
+        //     callback: ({ data, }) => {
+        setTimeout(()=>{
+            if (this.hasChildOpen) { // itemCompnent子组件的上下文
+                this.childContext.close(); 
+            }
+            if (this.state.showLoading1) {
+                this.setState({
+                    showLoading1: false,
+                });
+            }
+            this.setState({ 
+                data: fakeData,
+                showLoading2: false,
+            });
+        }, 2000);
+                
+            // },
+        // });
     }
 
     render() {
+        const { navigation } = this.props;
         const { data, showLoading1, showLoading2, } = this.state;
-        
+
         return (
             <View style={styles.container}>
-                <DateHeaderComponent getTrainList={this.requestTrainList} />
-                <ListComponent data={data || {}} parentContext={this} />
+                <DateHeaderComponent getTrainList={this.requestTrainList} navigation={navigation} />
+                <ListComponent data={data || {}} parentContext={this} navigation={navigation} />
                 <SfzMaskComponent />
                 {showLoading1 ? <Loading1Component /> : null}
                 {showLoading2 ? <Loading2Component /> : null}

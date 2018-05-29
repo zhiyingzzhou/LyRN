@@ -10,10 +10,6 @@ import {
 
 export default class SeatsListComponent extends Component {
 
-    static contextTypes = {
-        navigation: PropTypes.object,
-    }
-
     static propTypes = {
         navigation: PropTypes.object,
         data: PropTypes.object,
@@ -22,7 +18,7 @@ export default class SeatsListComponent extends Component {
 
     handlePress = (item) => {
         if (item.seats > 0) {
-            this.context.navigation.navigate('TrainOrder', {
+            this.props.navigation.navigate('TrainOrder', {
                 data: { 
                     ...this.props.data.item, 
                     selectedSeats: item, 

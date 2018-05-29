@@ -19,7 +19,7 @@ import { getCityListByLetter, getHotCities } from '../actions/http';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { selectCity } from '../actions';
+import { switchCity } from '../actions';
 
 import LoadingComponent from '../components/loading';
 
@@ -27,7 +27,7 @@ class CityPage extends Component {
 
     static propTypes = {
         navigation: PropTypes.object,
-        selectCity: PropTypes.func
+        switchCity: PropTypes.func
     }
 
     state = {
@@ -86,11 +86,11 @@ class CityPage extends Component {
          * key {String} fromCity或者toCity
          */
         const { historycities = [] } = this.state;
-        const { navigation, selectCity } = this.props;
+        const { navigation, switchCity } = this.props;
         const { state, goBack } = navigation;
         const { key } = state.params || {};
 
-        selectCity({ [key]: data });
+        switchCity({ [key]: data });
 
         goBack();
 
@@ -203,6 +203,6 @@ const styles = StyleSheet.create({
     },
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ selectCity }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ switchCity }, dispatch);
 
 export default connect(() => ({}), mapDispatchToProps)(CityPage);

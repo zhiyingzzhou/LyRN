@@ -30,8 +30,6 @@ class BackNavbarComponent extends Component {
         let title = '';
         const { scene: { route }, navigation: { goBack } } = this.props.navigator,
             { routeName, params } = route;
-
-        // console.log(Platform.OS);
         if (routeName === 'TrainList') {
             const { from, to } = params;
 
@@ -46,7 +44,7 @@ class BackNavbarComponent extends Component {
                     activeOpacity={0.6}
                     onPress={ () => { 
                         requestAnimationFrame(() => {
-                            goBack();
+                            goBack(null);
                         });
                     } }
                 >

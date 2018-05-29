@@ -15,20 +15,13 @@ import ListItemComponent from '../components/list_item';
 
 export default class TrainOrderPage extends Component {
 
-    childContextTypes = {
-        navigation: PropTypes.object
-    }
-
-    getChildContext = {
-        navigation: this.props.navigation
-    }
-
     static propTypes = {
         navigation: PropTypes.object
     }
 
     render() {
-        const { navigation: { state: { params: { data } } } } = this.props;
+        const { navigation } = this.props;
+        const { state: { params: { data } } } = navigation;
 
         return (
             <View 
@@ -58,7 +51,7 @@ export default class TrainOrderPage extends Component {
                         }}
                     />
                 
-                    <ConcatComponent />
+                    <ConcatComponent navigation={navigation} />
                 
                     <ListItemComponent
                         data = {{

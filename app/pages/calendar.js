@@ -17,14 +17,6 @@ import date from '../util/date';
 
 class CalenDarPage extends Component {
 
-    childContextTypes = {
-        navigation: PropTypes.object
-    }
-
-    getChildContext = {
-        navigation: this.props.navigation 
-    }
-
     dayMap = {
         [date.getToday()]: '今天',
         [date.getTomorrow()]: '明天',
@@ -77,6 +69,7 @@ class CalenDarPage extends Component {
                     onSelect={this.handleSelect} 
                     data={this.state.calendar} 
                     dayMap={this.dayMap}
+                    navigation={this.props.navigation}
                 />
             </View>
         );
